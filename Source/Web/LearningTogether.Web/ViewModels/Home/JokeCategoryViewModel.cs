@@ -3,7 +3,7 @@
     using LearningTogether.Data.Models;
     using LearningTogether.Web.Infrastructure.Mapping;
 
-    public class JokeCategoryViewModel : IMapFrom<JokeCategory>
+    public class JokeCategoryViewModel : IMapFrom<Category>
     {
         public int Id { get; set; }
 

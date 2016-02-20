@@ -4,26 +4,33 @@
     using System.Data.Entity;
     using System.Linq;
 
-    using Common.Models;
+    using LearningTogether.Data.Common.Models;
+    using LearningTogether.Data.Models;
 
     using Microsoft.AspNet.Identity.EntityFramework;
 
-    using LearningTogether.Data.Models;
-
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class LearningTogetherDbContext : IdentityDbContext<User>
     {
-        public ApplicationDbContext()
+        public LearningTogetherDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
 
-        public IDbSet<Joke> Jokes { get; set; }
+        public virtual IDbSet<ArticleItem> ArticleItems { get; set; }
 
-        public IDbSet<JokeCategory> JokesCategories { get; set; }
+        public virtual IDbSet<BookItem> BookItems { get; set; }
 
-        public static ApplicationDbContext Create()
+        public virtual IDbSet<ExternalItem> ExternalItems { get; set; }
+
+        public virtual IDbSet<Comment> Comments { get; set; }
+
+        public virtual IDbSet<Category> ItemCategories { get; set; }
+
+        public virtual IDbSet<Rating> Ratings { get; set; }
+
+        public static LearningTogetherDbContext Create()
         {
-            return new ApplicationDbContext();
+            return new LearningTogetherDbContext();
         }
 
         public override int SaveChanges()
@@ -39,7 +46,8 @@
                 this.ChangeTracker.Entries()
                     .Where(
                         e =>
-                        e.Entity is IAuditInfo && ((e.State == EntityState.Added) || (e.State == EntityState.Modified))))
+                        e.Entity is IAuditInfo && ((e.State == EntityState.Added) || (e.State == EntityState.Modified)))
+                )
             {
                 var entity = (IAuditInfo)entry.Entity;
                 if (entry.State == EntityState.Added && entity.CreatedOn == default(DateTime))

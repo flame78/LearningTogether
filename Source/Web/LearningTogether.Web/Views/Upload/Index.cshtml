@@ -1,0 +1,13 @@
+﻿@model LearningTogether.Web.ViewModels.ItemViewModel
+
+@using (Html.BeginForm("SiteScreenshotUpload", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.DisplayForModel()
+
+    @Html.HiddenFor(m => m.Id)
+
+    <input type="file" name="file" />
+    <input type="submit" value="OK" />
+}

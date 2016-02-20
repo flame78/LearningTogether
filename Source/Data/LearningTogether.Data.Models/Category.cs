@@ -4,15 +4,15 @@
 
     using LearningTogether.Data.Common.Models;
 
-    public class JokeCategory : BaseModel<int>
+    public class Category : BaseModel<int>
     {
-        public JokeCategory()
+        public Category()
         {
-            this.Jokes = new HashSet<Joke>();
+            this.Items = new HashSet<BaseItem>();
         }
 
         public string Name { get; set; }
 
-        public virtual ICollection<Joke> Jokes { get; set; }
+        public virtual ICollection<BaseItem> Items { get; set; }
     }
 }

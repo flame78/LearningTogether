@@ -6,8 +6,8 @@
 
     public interface IJokesService
     {
-        IQueryable<Joke> GetRandomJokes(int count);
+        IQueryable<Comment> GetRandomJokes(int count);
 
-        Joke GetById(string id);
+        Comment GetById(string id);
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace LearningTogether.Data.Common.Models
+﻿ namespace LearningTogether.Data.Common.Models
 {
     using System;
 

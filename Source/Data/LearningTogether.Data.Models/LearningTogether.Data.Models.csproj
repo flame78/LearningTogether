@@ -59,9 +59,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationUser.cs" />
-    <Compile Include="Joke.cs" />
-    <Compile Include="JokeCategory.cs" />
+    <Compile Include="ArticleItem.cs" />
+    <Compile Include="BaseItem.cs" />
+    <Compile Include="BookItem.cs" />
+    <Compile Include="ExternalItem.cs" />
+    <Compile Include="Rating.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="Comment.cs" />
+    <Compile Include="Category.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +74,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\LearningTogether.Common\LearningTogether.Common.csproj">
+      <Project>{701f322f-aa01-4ddc-90b6-6935981c1e73}</Project>
+      <Name>LearningTogether.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LearningTogether.Data.Common\LearningTogether.Data.Common.csproj">
       <Project>{edfe3c57-ef5b-4636-9ecc-d0baca6b6379}</Project>
       <Name>LearningTogether.Data.Common</Name>

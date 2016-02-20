@@ -5,7 +5,7 @@
     using LearningTogether.Services.Web;
     using LearningTogether.Web.Infrastructure.Mapping;
 
-    public class JokeViewModel : IMapFrom<Joke>, IHaveCustomMappings
+    public class JokeViewModel : IMapFrom<Comment>, IHaveCustomMappings
     {
         public int Id { get; set; }
 
@@ -24,8 +24,9 @@
 
         public void CreateMappings(IMapperConfiguration configuration)
         {
-            configuration.CreateMap<Joke, JokeViewModel>()
-                .ForMember(x => x.Category, opt => opt.MapFrom(x => x.Category.Name));
+            //todo:clear
+            //configuration.CreateMap<Comment, JokeViewModel>()
+            //    .ForMember(x => x.Category, opt => opt.MapFrom(x => x.Category.Name));
         }
     }
 }

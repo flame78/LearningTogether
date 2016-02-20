@@ -47,7 +47,7 @@
 
         private static void RegisterServices(ContainerBuilder builder)
         {
-            builder.Register(x => new ApplicationDbContext())
+            builder.Register(x => new LearningTogetherDbContext())
                 .As<DbContext>()
                 .InstancePerRequest();
             builder.Register(x => new HttpCacheService())
