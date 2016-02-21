@@ -5,7 +5,7 @@
 
 @foreach (var item in Model)
 {
-    <img src="@GlobalConstants.UploadsPath/@item.ScreenShotName"/>
+    <img src="@item.ScreenShotName"/>
     <a href="@item.Link">@item.Link</a>
     <p>@item.Description</p>
 }

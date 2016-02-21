@@ -50,11 +50,10 @@
             builder.Register(x => new LearningTogetherDbContext())
                 .As<DbContext>()
                 .InstancePerRequest();
+
+            builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(IIdentifierProvider))).AsImplementedInterfaces();
             builder.Register(x => new HttpCacheService())
                 .As<ICacheService>()
-                .InstancePerRequest();
-            builder.Register(x => new IdentifierProvider())
-                .As<IIdentifierProvider>()
                 .InstancePerRequest();
 
             var servicesAssembly = Assembly.GetAssembly(typeof(IJokesService));

@@ -25,6 +25,13 @@
             </div>
         </div>
     </div>
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <strong> @TempData["Error"] </strong>
+        </div>
+    }
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -32,7 +39,6 @@
             <p>&copy; @DateTime.Now.Year - LearningTogether</p>
         </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
