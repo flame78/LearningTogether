@@ -43,8 +43,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CategoriesService.cs" />
+    <Compile Include="GenericItemsService.cs" />
+    <Compile Include="IArticleItems.cs" />
+    <Compile Include="IBookItems.cs" />
     <Compile Include="ICategoriesService.cs" />
+    <Compile Include="ICommentsService.cs" />
+    <Compile Include="IGenericItemsService.cs" />
     <Compile Include="IJokesService.cs" />
+    <Compile Include="IRatingsService.cs" />
     <Compile Include="JokesService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

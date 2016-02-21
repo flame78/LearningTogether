@@ -9,33 +9,36 @@
 
     using LearningTogether.Common;
     using LearningTogether.Data;
+    using LearningTogether.Data.Models;
+    using LearningTogether.Services.Data;
     using LearningTogether.Services.Web;
     using LearningTogether.Web.Infrastructure.Mapping;
     using LearningTogether.Web.ViewModels;
 
-    public class UploadController : Controller
+    public class UploadController : BaseController
     {
-        private LearningTogetherDbContext db = new LearningTogetherDbContext();
+        private readonly IFilesService filesService;
 
-        private IFilesService filesService;
+        private readonly IGenericItemsService<ExternalItem> externalItemsService;
 
-        public UploadController(IFilesService filesService)
+        public UploadController(IGenericItemsService<ExternalItem> externalItemsService, IFilesService filesService)
         {
             this.filesService = filesService;
+            this.externalItemsService = externalItemsService;
         }
 
+        [HttpGet]
         public ActionResult Index()
         {
-            var item = db.ExternalItems.To<ItemViewModel>().First();
-
-            return View(item);
+            var item = this.externalItemsService.All().To<ExternalItemViewModel>().First();
+            return this.View(item);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult SiteScreenshotUpload(HttpPostedFileBase file, int id)
         {
-            var item = db.ExternalItems.Find(id);
+            var item = this.externalItemsService.GetById(id);
 
             if (file != null && file.ContentLength > 0)
             {
@@ -43,9 +46,9 @@
                 {
                     var fileName = this.filesService.SaveScreenShot(this.Server.MapPath(GlobalConstants.UploadsPath), file);
                     item.ScreenShotName = fileName;
-                    db.SaveChanges();
+                    this.externalItemsService.Update(item);
                     this.TempData["Succes"] = "Upload Succes.";
-                    return RedirectToAction("Index");
+                    return this.RedirectToAction("Index");
                 }
 
                 this.TempData["Error"] = "Invalid Image !";
@@ -55,7 +58,7 @@
                 this.TempData["Error"] = "Invalid File !";
             }
 
-            return RedirectToAction("Index");
+            return this.RedirectToAction("Index");
         }
     }
 }

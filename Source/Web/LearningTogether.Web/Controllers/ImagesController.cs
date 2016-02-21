@@ -21,7 +21,6 @@
         {
             var base64EncodedBytes = System.Convert.FromBase64String(encodedUrl);
             var url = Encoding.UTF8.GetString(base64EncodedBytes);
-         //   this.GetPictureStreamAsync(url);
             return new FileStreamResult(this.stream, "image/png");
         }
 
@@ -29,7 +28,7 @@
         {
             this.MakePicture(url);
 
-            while (isComplete == false)
+            while (this.isComplete == false)
             {
             }
         }
@@ -50,7 +49,7 @@
                             browser.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(DocumentCompleted);
                             while (browser.ReadyState != WebBrowserReadyState.Complete)
                             {
-                                System.Windows.Forms.Application.DoEvents();
+                                Application.DoEvents();
                             }
                         }
                     });
@@ -64,7 +63,7 @@
             WebBrowser browser = sender as WebBrowser;
             using (Bitmap bitmap = new Bitmap(browser.Width, browser.Height))
             {
-                browser.DrawToBitmap(bitmap, new System.Drawing.Rectangle(0, 0, browser.Width, browser.Height));
+                browser.DrawToBitmap(bitmap, new Rectangle(0, 0, browser.Width, browser.Height));
                 Size newSize = new Size((int)(browser.Width * ZoomFactor), (int)(browser.Height * ZoomFactor));
                 var resizedBitmap = new Bitmap(bitmap, newSize);
                 resizedBitmap.Save(this.stream, System.Drawing.Imaging.ImageFormat.Png);

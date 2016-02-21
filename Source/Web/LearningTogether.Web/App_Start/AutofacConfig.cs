@@ -52,6 +52,10 @@
                 .InstancePerRequest();
 
             builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(IIdentifierProvider))).AsImplementedInterfaces();
+            builder.RegisterGeneric(typeof(GenericItemsService<>))
+                          .As(typeof(IGenericItemsService<>))
+                          .InstancePerRequest();
+
             builder.Register(x => new HttpCacheService())
                 .As<ICacheService>()
                 .InstancePerRequest();

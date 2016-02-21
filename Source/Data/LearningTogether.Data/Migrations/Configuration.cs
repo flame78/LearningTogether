@@ -21,9 +21,9 @@
         {
             if (!context.Users.Any())
             {
-                var user = SeedUsers(context);
-                SeedSites(context, user);
-                SeedArticles(context, user);
+                var user = this.SeedUsers(context);
+                this.SeedSites(context, user);
+                this.SeedArticles(context, user);
             }
         }
 

@@ -24,7 +24,7 @@
 
             category = new Category { Name = name };
             this.categories.Add(category);
-            this.categories.Save();
+            this.categories.SaveChanges();
             return category;
         }
 

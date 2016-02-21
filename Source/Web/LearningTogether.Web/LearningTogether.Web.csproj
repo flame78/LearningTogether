@@ -223,7 +223,7 @@
     <Compile Include="ViewModels\Home\IndexViewModel.cs" />
     <Compile Include="ViewModels\Home\JokeCategoryViewModel.cs" />
     <Compile Include="ViewModels\Home\JokeViewModel.cs" />
-    <Compile Include="ViewModels\ItemViewModel.cs" />
+    <Compile Include="ViewModels\ExternalItemViewModel.cs" />
     <Compile Include="ViewModels\Manage\AddPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\Manage\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\FactorViewModel.cs" />

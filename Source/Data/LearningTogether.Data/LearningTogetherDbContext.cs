@@ -24,7 +24,7 @@
 
         public virtual IDbSet<Comment> Comments { get; set; }
 
-        public virtual IDbSet<Category> ItemCategories { get; set; }
+        public virtual IDbSet<Category> Categories { get; set; }
 
         public virtual IDbSet<Rating> Ratings { get; set; }
 

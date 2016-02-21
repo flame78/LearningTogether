@@ -3,15 +3,17 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.IO;
+    using System.Linq;
     using System.Text;
     using System.Windows.Forms;
 
+    using AutoMapper;
 
     using LearningTogether.Common;
     using LearningTogether.Data.Models;
     using LearningTogether.Web.Infrastructure.Mapping;
 
-    public class ItemViewModel : IMapFrom<ExternalItem>
+    public class ExternalItemViewModel : IMapFrom<ExternalItem>, IHaveCustomMappings
     {
         public int Id { get; set; }
 
@@ -21,6 +23,12 @@
 
         public string ScreenShotName { get; set; }
 
-        public string EncodedLink => Convert.ToBase64String(Encoding.UTF8.GetBytes(this.Link));
+        public double? Rating { get; set; }
+
+        public void CreateMappings(IMapperConfiguration configuration)
+        {
+            configuration.CreateMap<ExternalItem, ExternalItemViewModel>()
+                .ForMember(x => x.Rating, opt => opt.MapFrom(y => y.Ratings.Average(z => z.Value)));
+        }
     }
 }
