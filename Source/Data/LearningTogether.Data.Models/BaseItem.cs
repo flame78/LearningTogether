@@ -11,7 +11,7 @@
         {
             this.Comments = new HashSet<Comment>();
             this.Ratings = new HashSet<Rating>();
-            this.Categories = new HashSet<Category>();
+            this.Tags = new HashSet<Tag>();
         }
 
         [Required]
@@ -23,10 +23,15 @@
         [StringLength(1000, ErrorMessage = "{0} cant be shorter {2} symbols and {1} longer  !", MinimumLength = 20)]
         public string Description { get; set; }
 
+        [Required]
+        public int CategoryId { get; set; }
+
+        public virtual Category Category { get; set; }
+
         public virtual ICollection<Comment> Comments { get; set; }
 
         public virtual ICollection<Rating> Ratings { get; set; }
 
-        public virtual ICollection<Category> Categories { get; set; }
+        public virtual ICollection<Tag> Tags { get; set; }
     }
 }

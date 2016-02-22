@@ -1,4 +1,8 @@
-﻿@using LearningTogether.Common
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using LearningTogether.Common
 @model LearningTogether.Web.ViewModels.Home.IndexViewModel
 
 <h1>Under construction</h1>
@@ -35,7 +39,7 @@
     {
         <div class="col-sm-4">
             <a href="@item.Link">
-                <img src="/@item.ScreenShotName" class="img-rounded col-sm-9 pull-left" alt="" />
+                <img src="/@item.ScreenShotName" class="img-rounded col-sm-9 pull-left" alt=""/>
             </a>
             @item.Description
         </div>

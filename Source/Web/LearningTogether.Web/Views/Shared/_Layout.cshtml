@@ -1,10 +1,14 @@
-﻿<!DOCTYPE html>
+﻿@using LearningTogether.Common
+@using LearningTogether.Web.Infrastructure
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - LearningTogether</title>
     @Styles.Render("~/Content/css")
+    @RenderSection("styles", required: false)
+    @Scripts.Render("~/bundles/jquery")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -21,6 +25,13 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = string.Empty }, null)</li>
                 </ul>
+                @RenderSection("menu", required: false)
+                @if (User.IsInRole(GlobalConstants.AdministratorRoleName))
+                {
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Administration", "Index", "Categories", new { area = WebConstants.AdministrationAraeName }, null)</li>
+                    </ul>
+                }
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
@@ -48,13 +59,12 @@
     }
     <div class="body-content">
         @RenderBody()
-        <hr/>
+        <hr />
         <div class="clearfix"></div>
         <footer>
             <p>&copy; @DateTime.Now.Year - LearningTogether</p>
         </footer>
     </div>
-    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

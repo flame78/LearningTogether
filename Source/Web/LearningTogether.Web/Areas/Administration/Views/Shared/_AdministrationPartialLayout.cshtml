@@ -1,0 +1,39 @@
+﻿@using LearningTogether.Web.Infrastructure
+@{
+    Layout = "~/Views/Shared/_LayoutWithContainer.cshtml";
+}
+
+@section styles {
+    @RenderSection("styles", required: false)
+}
+
+@section menu {
+    <ul class="dropdown nav navbar-nav">
+        <li>
+            <a class="btn dropdown-toggle" data-toggle="dropdown">
+                Administration
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu nav navbar-nav">
+                <li>@Html.ActionLink("Users", "Index", "Users", new { area = WebConstants.AdministrationAraeName }, null)</li>
+                <li>@Html.ActionLink("Categories", "Index", "Categories", new { area = WebConstants.AdministrationAraeName }, null)</li>
+                <li>@Html.ActionLink("Ratings", "Index", "Categories", new { area = WebConstants.AdministrationAraeName }, null)</li>
+                <li>@Html.ActionLink("Comments", "Index", "Categories", new { area = WebConstants.AdministrationAraeName }, null)</li>
+                <li>@Html.ActionLink("Tags", "Index", "Categories", new { area = WebConstants.AdministrationAraeName }, null)</li>
+                <li>@Html.ActionLink("External Items", "Index", "Categories", new { area = WebConstants.AdministrationAraeName }, null)</li>
+                <li>@Html.ActionLink("Items", "Index", "Categories", new { area = WebConstants.AdministrationAraeName }, null)</li>
+            </ul>
+        </li>
+        
+    </ul>
+
+}
+<div class="container">
+    @RenderBody()
+</div>
+
+@section scripts {
+    @RenderSection("scripts", required: false)
+}
+
+

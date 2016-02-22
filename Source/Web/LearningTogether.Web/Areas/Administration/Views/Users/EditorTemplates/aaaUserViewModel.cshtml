@@ -1,0 +1,10 @@
+﻿@model object
+
+@{
+    if (Model != null)
+    {
+        var roles = (Dictionary<string, string>)ViewBag.Roles;
+
+        @roles[(string)Model]
+    }
+}

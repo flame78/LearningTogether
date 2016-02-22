@@ -26,6 +26,12 @@
 
         public virtual IDbSet<Category> Categories { get; set; }
 
+        public virtual IDbSet<Tag> Tags { get; set; }
+
+        //public virtual IDbSet<Question> Questions { get; set; }
+
+        //public virtual IDbSet<Answer> Answers { get; set; }
+
         public virtual IDbSet<Rating> Ratings { get; set; }
 
         public static LearningTogetherDbContext Create()

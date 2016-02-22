@@ -7,6 +7,5 @@
         public const string ModeratorRoleName = "Moderator";
 
         public const string UploadsPath = "~/Content/Uploads";
-
     }
 }

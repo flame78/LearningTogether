@@ -1,0 +1,40 @@
+﻿@section styles
+{
+    @Styles.Render("~/Content/kendo")
+}
+
+@(Html.Kendo().Grid<LearningTogether.Data.Models.Category>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+        columns.Bound(c => c.Name);
+        columns.Bound(c => c.CreatedOn);
+        columns.Bound(c => c.ModifiedOn);
+        columns.Bound(c => c.IsDeleted);
+        columns.Bound(c => c.DeletedOn);
+        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(180);
+      })
+      .ToolBar(toolbar => {
+            toolbar.Create();
+      })
+      .Editable(editable => editable.Mode(GridEditMode.InLine))
+      .Pageable()
+      .Sortable(sortable => {
+          sortable.SortMode(GridSortMode.SingleColumn);
+      })
+      .Filterable()
+      .Scrollable(scrollable => scrollable.Enabled(false))
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model => model.Id(p => p.Id))
+          .Read(read => read.Action("Categories_Read", "Categories"))
+          .Create(create => create.Action("Categories_Create", "Categories"))
+          .Update(update => update.Action("Categories_Update", "Categories"))
+          .Destroy(destroy => destroy.Action("Categories_Destroy", "Categories"))
+      )
+      )
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/kendo")
+}

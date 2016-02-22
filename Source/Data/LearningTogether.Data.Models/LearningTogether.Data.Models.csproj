@@ -64,6 +64,7 @@
     <Compile Include="BookItem.cs" />
     <Compile Include="ExternalItem.cs" />
     <Compile Include="Rating.cs" />
+    <Compile Include="Tag.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Comment.cs" />
     <Compile Include="Category.cs" />

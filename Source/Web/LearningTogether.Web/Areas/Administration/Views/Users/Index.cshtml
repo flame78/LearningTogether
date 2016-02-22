@@ -1,0 +1,49 @@
+﻿@using LearningTogether.Data.Models
+@using LearningTogether.Web.Areas.Administration.Models
+
+@section styles
+{
+    @Styles.Render("~/Content/kendo")
+}
+<br/>
+@(Html.Kendo().Grid<UserViewModel>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.Email);
+          columns.Bound(c => c.Roles).Template(@<text>
+                                                   @{
+                                                       foreach (var role in item.Roles)
+                                                       {
+                                                           <p>@role</p>
+                                                       }
+                                                }
+                                                </text>);
+          columns.Command(command => { command.Edit(); command.Destroy(); }).Width(180);
+      })
+      .ToolBar(toolbar =>
+      {
+          toolbar.Create();
+      })
+      .Editable(editable => editable.Mode(GridEditMode.PopUp))
+      .Pageable()
+      .Sortable(sortable =>
+      {
+          sortable.SortMode(GridSortMode.SingleColumn);
+      })
+      .Filterable()
+      .Scrollable(scrollable => scrollable.Enabled(false))
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model => model.Id(p => p.Id))
+          .Read(read => read.Action("Users_Read", "Users"))
+          .Create(create => create.Action("Users_Create", "Users"))
+          .Update(update => update.Action("Users_Update", "Users"))
+          .Destroy(destroy => destroy.Action("Users_Destroy", "Users"))
+      )
+)
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/kendo")
+}
