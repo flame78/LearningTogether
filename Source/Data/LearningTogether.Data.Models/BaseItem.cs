@@ -20,6 +20,7 @@
         public virtual User Author { get; set; }
 
         [Required]
+        [StringLength(1000, ErrorMessage = "{0} cant be shorter {2} symbols and {1} longer  !", MinimumLength = 20)]
         public string Description { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }

@@ -4,8 +4,12 @@
 
     public class IndexViewModel
     {
-        public IEnumerable<JokeViewModel> Jokes { get; set; }
+        public ICollection<ExternalItemViewModel> Sites { get; set; }
 
-        public IEnumerable<JokeCategoryViewModel> Categories { get; set; }
+        public ICollection<ExternalItemViewModel> Videos { get; set; }
+
+        public ICollection<ExternalItemViewModel> Articles { get; set; }
+
+
     }
 }

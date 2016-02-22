@@ -1,11 +1,43 @@
 ﻿@using LearningTogether.Common
-@model ICollection<LearningTogether.Web.ViewModels.ExternalItemViewModel>
+@model LearningTogether.Web.ViewModels.Home.IndexViewModel
 
 <h1>Under construction</h1>
 
-@foreach (var item in Model)
-{
-    <img src="@item.ScreenShotName"/>
-    <a href="@item.Link">@item.Link</a>
-    <p>@item.Description</p>
-}
+<div class="row">
+    <h2 class="text-center">Top WebSites</h2>
+    @foreach (var item in Model.Sites)
+    {
+        <div class="col-sm-4">
+            <a href="@item.Link">
+                <img src="/@item.ScreenShotName" class="img-rounded col-sm-9 pull-left" alt=""/>
+            </a>
+            @item.Description
+        </div>
+    }
+</div>
+
+<div class="row">
+    <h2 class="text-center">Top Videos</h2>
+    @foreach (var item in Model.Videos)
+    {
+        <div class="col-sm-4">
+            <a href="@item.Link">
+                <img src="/@item.ScreenShotName" class="img-rounded col-sm-9 pull-left" alt=""/>
+            </a>
+            @item.Description
+        </div>
+    }
+</div>
+
+<div class="row">
+    <h2 class="text-center">Top Articles</h2>
+    @foreach (var item in Model.Articles)
+    {
+        <div class="col-sm-4">
+            <a href="@item.Link">
+                <img src="/@item.ScreenShotName" class="img-rounded col-sm-9 pull-left" alt="" />
+            </a>
+            @item.Description
+        </div>
+    }
+</div>

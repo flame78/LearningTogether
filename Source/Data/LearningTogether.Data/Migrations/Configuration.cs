@@ -53,7 +53,7 @@
 
         private void SeedSites(LearningTogetherDbContext context, User user)
         {
-            var sites = new ExternalItem[]
+            var extItems = new ExternalItem[]
                             {
                                 new ExternalItem()
                                     {
@@ -62,17 +62,26 @@
 
 Launched in 2009 to address the shortage of IT professionals, Telerik Academy is organized and sponsored entirely by Telerik, a Progress company. All courses are held in Bulgarian on the company’s Sofia, Bulgaria campus,
 and are likewise accessible free on YouTube.com. ",
-                                        Link = "http://telerikacademy.com/"
+                                        Link = "http://telerikacademy.com/",
+                                        Type = ExternalItemType.Site
                                     },
                                 new ExternalItem()
                                     {
                                         Author = user,
                                         Description = @"Learn English Online",
-                                        Link = "http://www.english-online.org.uk/course.htm?name=beg&link=begcourse.htm"
+                                        Link = "http://www.english-online.org.uk/",
+                                        Type = ExternalItemType.Site
+                                    },
+                                new ExternalItem()
+                                    {
+                                        Author = user,
+                                        Description = @"Looking to go off road for the first time? Here are tips and advice you need to make your introduction to mountain biking fun and successful.",
+                                        Link = "http://www.active.com/mountain-biking/articles/beginner-s-guide-to-mountain-biking",
+                                        Type = ExternalItemType.Article
                                     },
 
                             };
-            context.ExternalItems.AddOrUpdate(sites);
+            context.ExternalItems.AddOrUpdate(extItems);
             context.SaveChanges();
         }
 

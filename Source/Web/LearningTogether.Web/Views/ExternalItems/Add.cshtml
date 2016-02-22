@@ -1,0 +1,18 @@
+﻿@model LearningTogether.Web.ViewModels.ExternalItems.ExternalItemAddModel
+
+<h2>Add</h2>
+
+@using (Html.BeginForm("Add"))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.EditorForModel()
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Add" />
+        </div>
+    </div>
+}
+
+

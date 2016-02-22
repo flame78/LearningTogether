@@ -203,6 +203,7 @@
     <Compile Include="App_Start\GlimpseSecurityPolicy.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ExternalItemsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\JokesController.cs" />
@@ -220,6 +221,7 @@
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Account\SendCodeViewModel.cs" />
     <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
+    <Compile Include="ViewModels\ExternalItems\ExternalItemAddModel.cs" />
     <Compile Include="ViewModels\Home\IndexViewModel.cs" />
     <Compile Include="ViewModels\Home\JokeCategoryViewModel.cs" />
     <Compile Include="ViewModels\Home\JokeViewModel.cs" />
@@ -300,6 +302,9 @@
     <Content Include="Scripts\jquery-2.2.0.min.map" />
     <Content Include="Views\Jokes\ById.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\ExternalItems\Index.cshtml" />
+    <Content Include="Views\ExternalItems\Add.cshtml" />
+    <Content Include="Views\ExternalItems\EditorTemplates\ExternalItemAddModel.cshtml" />
     <None Include="Views\Upload\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
