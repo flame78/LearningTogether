@@ -16,13 +16,13 @@ namespace LearningTogether.Web.Controllers
     using Microsoft.AspNet.Identity;
 
     [Authorize]
-    public class ExternalItemsController : BaseController
+    public class ExternalResourcesController : BaseController
     {
         private readonly IFilesService filesService;
 
-        private readonly IGenericItemsService<ExternalItem> externalItemsService;
+        private readonly IExternalItemsService externalItemsService;
 
-        public ExternalItemsController(IGenericItemsService<ExternalItem> externalItemsService, IFilesService filesService)
+        public ExternalResourcesController(IExternalItemsService externalItemsService, IFilesService filesService)
         {
             this.filesService = filesService;
             this.externalItemsService = externalItemsService;

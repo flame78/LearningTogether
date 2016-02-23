@@ -9,5 +9,7 @@
     public interface IExternalItemsService : IGenericItemsService<ExternalItem>
     {
         IQueryable<ExternalItem> GetTop(int count, ExternalItemType type);
+
+        IQueryable<ExternalItem> All(ExternalItemType type);
     }
 }

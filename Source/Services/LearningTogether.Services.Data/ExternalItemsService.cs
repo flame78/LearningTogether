@@ -15,7 +15,12 @@
 
         public IQueryable<ExternalItem> GetTop(int count, ExternalItemType type)
         {
-            return this.All().Where(x => x.Type == type).OrderBy(y => y.Ratings.Average(z => z.Value)).Take(count);
+            return this.All().Where(x => x.Type == type).OrderByDescending(y => y.Ratings.Average(z => z.Value)).Take(count);
+        }
+
+        public IQueryable<ExternalItem> All(ExternalItemType type)
+        {
+            return this.All().Where(x => x.Type == type);
         }
     }
 }
