@@ -12,6 +12,10 @@
     using Data;
     using Data.Common;
 
+    using LearningTogether.Data.Models;
+
+    using Microsoft.AspNet.Identity.EntityFramework;
+
     using Services.Data;
     using Services.Web;
 
@@ -58,6 +62,10 @@
 
             builder.Register(x => new HttpCacheService())
                 .As<ICacheService>()
+                .InstancePerRequest();
+
+            builder.Register(x => new LearningTogetherDbContext())
+                .As<IdentityDbContext<User>>()
                 .InstancePerRequest();
 
             var servicesAssembly = Assembly.GetAssembly(typeof(IJokesService));

@@ -15,7 +15,7 @@
 
     using WebGrease.Css.Extensions;
 
-    public class UserViewModel : IMapFrom<User>
+    public class UserViewModel : IMapFrom<User>, IHaveCustomMappings
     {
         public string Id { get; set; }
 
@@ -23,5 +23,11 @@
         public string Email { get; set; }
 
         public ICollection<string> Roles { get; set; }
+
+        public void CreateMappings(IMapperConfiguration configuration)
+        {
+            configuration.CreateMap<User, UserViewModel>()
+                .ForMember(x => x.Roles, opt => opt.MapFrom(y => y.Roles.Select(z => z.RoleId).ToList()));
+        }
     }
 }

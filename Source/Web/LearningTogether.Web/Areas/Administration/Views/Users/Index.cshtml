@@ -1,31 +1,27 @@
-﻿@using LearningTogether.Data.Models
+﻿@using System.Web.Script.Serialization
+@using LearningTogether.Data.Models
+@using LearningTogether.Web.Areas.Administration
 @using LearningTogether.Web.Areas.Administration.Models
 
 @section styles
 {
     @Styles.Render("~/Content/kendo")
 }
-<br/>
+<br />
+
 @(Html.Kendo().Grid<UserViewModel>()
       .Name("grid")
       .Columns(columns =>
       {
           columns.Bound(c => c.Email);
-          columns.Bound(c => c.Roles).Template(@<text>
-                                                   @{
-                                                       foreach (var role in item.Roles)
-                                                       {
-                                                           <p>@role</p>
-                                                       }
-                                                }
-                                                </text>);
-          columns.Command(command => { command.Edit(); command.Destroy(); }).Width(180);
+          columns.Bound(c => c.Roles).ClientTemplate("#=showRoles(Roles)#").HeaderTemplate(@<text>Roles</text>);
+          columns.Bound(c => c.Id).ClientTemplate("<a class='k-button k-button-icontext' href='/Administration/Users/Edit/#=Id#'><span class='k-icon k-edit' ></span>Edit</a>").Width(90);
+          columns.Command(command => { command.Destroy(); }).Width(100);
       })
       .ToolBar(toolbar =>
       {
-          toolbar.Create();
+      toolbar.Template("<a class='btn k-button k-button-icontext' href='/Administration/Users/Create'><span class='k-icon k-create' ></span>Create</a>");
       })
-      .Editable(editable => editable.Mode(GridEditMode.PopUp))
       .Pageable()
       .Sortable(sortable =>
       {
@@ -37,13 +33,29 @@
           .Ajax()
           .Model(model => model.Id(p => p.Id))
           .Read(read => read.Action("Users_Read", "Users"))
-          .Create(create => create.Action("Users_Create", "Users"))
-          .Update(update => update.Action("Users_Update", "Users"))
           .Destroy(destroy => destroy.Action("Users_Destroy", "Users"))
       )
 )
 
 @section scripts
 {
+    <script type="text/javascript">
+        var showRoles = (function (rolesIds) {
+            var roles;
+            $.getJSON('/Administration/Users/Roles', function (data) {
+                roles = data;
+            });
+
+            return function (rolesIds) {
+
+                var result = "";
+                rolesIds.forEach(function (id) {
+                    result += ("<p>" + roles[id] + "</p>");
+                }, this);
+                return result;
+            };
+        })();
+    </script>
     @Scripts.Render("~/bundles/kendo")
+
 }
