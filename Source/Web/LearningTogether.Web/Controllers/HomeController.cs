@@ -15,35 +15,25 @@
 
     public class HomeController : BaseController
     {
-        private readonly IGenericItemsService<ExternalItem> externalItemsService;
+        private readonly IExternalItemsService externalItemsService;
 
-        public HomeController(IGenericItemsService<ExternalItem> externalItemsService)
+        public HomeController(IExternalItemsService externalItemsService)
         {
             this.externalItemsService = externalItemsService;
         }
 
         public ActionResult Index()
         {
-            var sites =
-                this.externalItemsService.All()
-                    .Where(x => x.Type == ExternalItemType.Site)
-                    .To<ExternalItemViewModel>()
-                    .OrderBy(x => x.Rating)
-                    .Take(2)
-                    .ToList();
-            var articles =
-                this.externalItemsService.All()
-                    .Where(x => x.Type == ExternalItemType.Article)
-                    .To<ExternalItemViewModel>()
-                    .OrderBy(x => x.Rating)
-                    .Take(2)
-                    .ToList();
+            var sites = this.externalItemsService.GetTop(2, ExternalItemType.Site).To<ExternalItemViewModel>().ToList();
+            var articles = this.externalItemsService.GetTop(2, ExternalItemType.Article).To<ExternalItemViewModel>().ToList();
+            var videos = this.externalItemsService.GetTop(2, ExternalItemType.Video).To<ExternalItemViewModel>().ToList();
+
             var viewModel = new IndexViewModel()
-                                {
-                                    Sites = sites,
-                                    Videos = new List<ExternalItemViewModel>(),
-                                    Articles = articles
-                                };
+            {
+                Sites = sites,
+                Videos = videos,
+                Articles = articles
+            };
             return this.View(viewModel);
         }
 
@@ -65,11 +55,12 @@
                 return
                     Json(
 
-                        new {
-                                Success = true,
-                                Message = "Your Vote was cast successfully",
-                                Result = new { Rating = itemVM.Rating.Rating, Raters = itemVM.Rating.Raters }
-                            });
+                        new
+                        {
+                            Success = true,
+                            Message = "Your Vote was cast successfully",
+                            Result = new { Rating = itemVM.Rating.Rating, Raters = itemVM.Rating.Raters }
+                        });
             }
             catch (Exception ex)
             {
