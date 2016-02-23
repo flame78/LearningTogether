@@ -6,8 +6,10 @@
     using LearningTogether.Data.Models;
     using LearningTogether.Web.Infrastructure.Mapping;
 
-    public class ExternalItemAddModel : IMapFrom<ExternalItem>
+    public class ExternalItemUpdateModel : IMapFrom<ExternalItem>
     {
+        public int Id { get; set; }
+
         [Required]
         [DataType(DataType.MultilineText)]
         [StringLength(1000, ErrorMessage = "{0} cant be shorter {2} symbols and {1} longer  !", MinimumLength = 20)]

@@ -232,11 +232,11 @@
     <Compile Include="Models\Account\ResetPasswordViewModel.cs" />
     <Compile Include="Models\Account\SendCodeViewModel.cs" />
     <Compile Include="Models\Account\VerifyCodeViewModel.cs" />
-    <Compile Include="Models\ExternalItems\ExternalItemAddModel.cs" />
+    <Compile Include="Models\ExternalItems\ExternalItemUpdateModel.cs" />
     <Compile Include="Models\Home\IndexViewModel.cs" />
     <Compile Include="Models\Home\JokeCategoryViewModel.cs" />
     <Compile Include="Models\Home\JokeViewModel.cs" />
-    <Compile Include="Models\ExternalItemViewModel.cs" />
+    <Compile Include="Models\ExternalItems\ExternalItemViewModel.cs" />
     <Compile Include="Models\Manage\AddPhoneNumberViewModel.cs" />
     <Compile Include="Models\Manage\ChangePasswordViewModel.cs" />
     <Compile Include="Models\Manage\FactorViewModel.cs" />
@@ -284,6 +284,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\rating.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -322,13 +323,16 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\ExternalItems\Index.cshtml" />
     <Content Include="Views\ExternalItems\Add.cshtml" />
-    <Content Include="Views\ExternalItems\EditorTemplates\ExternalItemAddModel.cshtml" />
+    <Content Include="Views\ExternalItems\EditorTemplates\ExternalItemUpdateModel.cshtml" />
     <Content Include="Views\Shared\_LayoutWithContainer.cshtml" />
+    <Content Include="Views\ExternalItems\Edit.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\ExternalItemViewModel.cshtml" />
     <None Include="Views\Upload\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Administration\Views\Administration\" />
+    <Folder Include="Content\images\" />
     <Folder Include="Content\Kendo-css\" />
     <Folder Include="Content\Uploads\" />
     <Folder Include="Scripts\KendoUi\" />
@@ -336,8 +340,6 @@
     <Folder Include="Views\Categories\" />
     <Folder Include="Views\Category\" />
     <Folder Include="Views\Images\" />
-    <Folder Include="Views\Ug\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

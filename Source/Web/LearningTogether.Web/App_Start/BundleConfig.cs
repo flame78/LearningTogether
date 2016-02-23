@@ -18,6 +18,8 @@
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include("~/Scripts/bootstrap.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/kendo").Include("~/Scripts/KendoUi/kendo.all.min.js", "~/Scripts/KendoUi/kendo.aspnetmvc.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/rating").Include("~/Scripts/Rating.js"));
         }
 
         private static void RegisterStyles(BundleCollection bundles)

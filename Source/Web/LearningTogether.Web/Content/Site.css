@@ -26,5 +26,39 @@ textarea {
 .full-width {
     width: 100%;
     max-width: inherit;
-    
+}
+
+.wrap {
+    z-index: -1;
+    width: 300px;
+    height: 230px;
+    padding: 0px;
+    margin: 3px;
+    float: left;
+    overflow: hidden;
+}
+
+.frame {
+    -ms-zoom: 0.7;
+    -ms-transform-origin: 0 0;
+    -moz-transform: scale(0.3);
+    -moz-transform-origin: 0px 0px;
+    -o-transform: scale(0.3);
+    -o-transform-origin: 0px 0px;
+    -webkit-transform: scale(0.3);
+    -webkit-transform-origin: 0 0;
+}
+
+.frame {
+    width: 1024px;
+    height: 768px;
+    overflow: hidden;
+}
+
+.description {
+    background: rgba(240, 240, 240, 0.7);
+}
+
+.fixed {
+    height: 300px;
 }

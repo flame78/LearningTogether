@@ -7,9 +7,9 @@
 
     public class FilesService : IFilesService
     {
-        private const int ScreenShotWidth = 400;
+        private const int ScreenShotWidth = 300;
 
-        private const int ScreenShotHeight = 300;
+        private const int ScreenShotHeight = 230;
 
         public string SaveScreenShot(string uploadsPath, HttpPostedFileBase file)
         {

@@ -40,9 +40,48 @@ namespace LearningTogether.Web.Controllers
             return this.View();
         }
 
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var item = Mapper.Map<ExternalItemUpdateModel>(externalItemsService.GetById(id));
+            return this.View(item);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(ExternalItemAddModel item, HttpPostedFileBase file)
+        public ActionResult Edit(ExternalItemUpdateModel item, HttpPostedFileBase file)
+        {
+            if (this.ModelState.IsValid)
+            {
+                string screenShotName = null;
+
+                var dbItem = externalItemsService.GetById(item.Id);
+
+                if (file != null && file.ContentLength > 0)
+                {
+                     screenShotName = this.ScreenShotUpload(file);
+                }
+
+                if (screenShotName != null)
+                {
+                    dbItem.ScreenShotName = screenShotName;
+                }
+
+                dbItem.Description = item.Description;
+                dbItem.Link = item.Link;
+                dbItem.Type = item.Type;
+
+                this.externalItemsService.Update(dbItem);
+                return this.RedirectToAction("Index");
+            }
+
+            return this.View(item);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add(ExternalItemUpdateModel item, HttpPostedFileBase file)
         {
             if (this.ModelState.IsValid)
             {

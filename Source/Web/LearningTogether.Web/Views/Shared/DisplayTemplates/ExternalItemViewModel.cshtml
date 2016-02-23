@@ -1,0 +1,23 @@
+﻿@model LearningTogether.Web.ViewModels.ExternalItemViewModel
+@using LearningTogether.Web.Infrastructure.Extensions
+<div class="col-sm-4">
+    <div>@Html.Ratings(Model.Rating)</div>
+    @if (string.IsNullOrWhiteSpace(Model.ScreenShotName))
+            {
+        <div class="wrap">
+            <a href="@Model.Link">
+                <iframe class="frame col-sm-10" src="@Model.Link" frameborder="0" allowfullscreen></iframe>
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="wrap">
+            <a href="@Model.Link">
+                <img alt="Screenshot" src="/@Model.ScreenShotName" />
+            </a>
+        </div>
+    }
+    @Model.Description
+    <br />
+</div>

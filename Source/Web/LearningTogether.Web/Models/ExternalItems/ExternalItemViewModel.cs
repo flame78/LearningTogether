@@ -11,6 +11,7 @@
 
     using LearningTogether.Common;
     using LearningTogether.Data.Models;
+    using LearningTogether.Web.Infrastructure.Extensions;
     using LearningTogether.Web.Infrastructure.Mapping;
 
     public class ExternalItemViewModel : IMapFrom<ExternalItem>, IHaveCustomMappings
@@ -23,12 +24,12 @@
 
         public string ScreenShotName { get; set; }
 
-        public double? Rating { get; set; }
+        public RatingModel Rating { get; set; }
 
         public void CreateMappings(IMapperConfiguration configuration)
         {
             configuration.CreateMap<ExternalItem, ExternalItemViewModel>()
-                .ForMember(x => x.Rating, opt => opt.MapFrom(y => y.Ratings.Average(z => z.Value)));
+                .ForMember(x => x.Rating, opt => opt.MapFrom(y => new RatingModel { Id = y.Id, Rating = y.Ratings.Count != 0 ? (int)y.Ratings.Average(z => z.Value) : 0, Raters = y.Ratings.Count}));
         }
     }
 }

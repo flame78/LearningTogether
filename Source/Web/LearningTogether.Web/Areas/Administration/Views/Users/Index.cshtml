@@ -9,6 +9,11 @@
 }
 <br />
 
+<div class="embed-responsive embed-responsive-16by9">
+    <iframe class="embed-responsive-item" width="854" height="480" src="https://www.youtube.com/embed/pNCdXt1MXps" frameborder="0" allowfullscreen></iframe>
+</div>
+
+
 @(Html.Kendo().Grid<UserViewModel>()
       .Name("grid")
       .Columns(columns =>
@@ -20,7 +25,7 @@
       })
       .ToolBar(toolbar =>
       {
-      toolbar.Template("<a class='btn k-button k-button-icontext' href='/Administration/Users/Create'><span class='k-icon k-create' ></span>Create</a>");
+      toolbar.Template("<a class='btn btn-default' href='/Administration/Users/Create'><span class='glyphicon glyphicon-plus-sign'></span> Create</a>");
       })
       .Pageable()
       .Sortable(sortable =>
