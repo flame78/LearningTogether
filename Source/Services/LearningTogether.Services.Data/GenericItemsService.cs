@@ -48,5 +48,20 @@
             this.items.Delete(item);
             this.items.SaveChanges();
         }
+
+        public bool Rate(int itemId, string userId, int vote)
+        {
+            var item = this.GetById(itemId);
+
+            if (item.Ratings.FirstOrDefault(x => x.UserId == userId) == null)
+            {
+                item.Ratings.Add(new Rating() { UserId = userId, Value = vote});
+                this.Update(item);
+
+                return true;
+            }
+
+            return false;
+        }
     }
 }

@@ -22,5 +22,7 @@
         void Update(T item);
 
         void DeleteById(int id);
+
+        bool Rate(int itemId, string userId, int vote);
     }
 }

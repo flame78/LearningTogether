@@ -9,6 +9,10 @@
 <h2 class="text-center">@ViewBag.Title</h2><div class="pull-right com-sm-4">@Html.ActionLink("Add", "Add", null, new { @class = "btn btn-default" })</div>
 <h3 class="text-center">External resources</h3>
 
+@using (Html.BeginForm("Index", "ExternalResources", FormMethod.Post, new { id = "form" }))
+{
+    @Html.Pager("form", Model.Items.PageIndex, Model.Items.TotalPages)
+}
 
 @{
     var i = 0;
@@ -27,9 +31,8 @@
     }
 }
 
-@Html.BeginForm("Index", "ExternalResources", FormMethod.Post, new { id = "form" })
-
-@Html.Pager("form", Model.Items.PageIndex, Model.Items.TotalPages)
+<div class="row clearfix">
+</div>
 
 @section scripts{
     @Scripts.Render("~/Bundles/Rating")

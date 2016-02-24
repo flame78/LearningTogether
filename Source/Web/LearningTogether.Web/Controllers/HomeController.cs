@@ -1,9 +1,7 @@
 ﻿namespace LearningTogether.Web.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Web;
     using System.Web.Mvc;
 
     using LearningTogether.Common;
@@ -12,6 +10,8 @@
     using LearningTogether.Web.Infrastructure.Mapping;
     using LearningTogether.Web.ViewModels;
     using LearningTogether.Web.ViewModels.Home;
+
+    using Microsoft.AspNet.Identity;
 
     public class HomeController : BaseController
     {
@@ -24,67 +24,52 @@
 
         public ActionResult Index()
         {
-            var sites = this.externalItemsService.GetTop(2, ExternalItemType.Site).To<ExternalItemViewModel>().ToList();
-            var articles = this.externalItemsService.GetTop(2, ExternalItemType.Article).To<ExternalItemViewModel>().ToList();
-            var videos = this.externalItemsService.GetTop(2, ExternalItemType.Video).To<ExternalItemViewModel>().ToList();
+            var sites = this.externalItemsService.GetTop(3, ExternalItemType.Site).To<ExternalItemViewModel>().ToList();
+            var articles =
+                this.externalItemsService.GetTop(3, ExternalItemType.Article).To<ExternalItemViewModel>().ToList();
+            var videos =
+                this.externalItemsService.GetTop(3, ExternalItemType.Video).To<ExternalItemViewModel>().ToList();
 
-            var viewModel = new IndexViewModel()
-            {
-                Sites = sites,
-                Videos = videos,
-                Articles = articles
-            };
+            var viewModel = new IndexViewModel() { Sites = sites, Videos = videos, Articles = articles };
+
             return this.View(viewModel);
         }
 
         public JsonResult SetRating(int id, int vote)
         {
-            try
+            var tryToVote = this.TryToVote(id, vote);
+
+            if (tryToVote != null)
             {
-                //if (CanUserVote(id, rating) == false)
-                //{
-                //    return Json(new { Success = false, Message = "Sorry, you already voted for this post" });
-                //}
-
-                //   PostModel post = Engine.Posts.SetRating(id, rating);
-                var item = this.externalItemsService.GetById(id);
-                item.Ratings.Add(new Rating() { Value = vote });
-                externalItemsService.Update(item);
-
-                var itemVM = Mapper.Map<ExternalItemViewModel>(item);
-                return
-                    Json(
-
-                        new
-                        {
-                            Success = true,
-                            Message = "Your Vote was cast successfully",
-                            Result = new { Rating = itemVM.Rating.Rating, Raters = itemVM.Rating.Raters }
-                        });
+                return tryToVote;
             }
-            catch (Exception ex)
-            {
-                return Json(new { Success = false, Message = ex.Message });
-            }
+
+            var item = this.externalItemsService.GetById(id);
+
+            var itemVM = this.Mapper.Map<ExternalItemViewModel>(item);
+            return
+                this.Json(
+                    new
+                    {
+                        Success = true,
+                        Message = "Your Vote was cast successfully",
+                        Result = new { Rating = itemVM.Rating.Rating, Raters = itemVM.Rating.Raters }
+                    });
         }
 
-        private Boolean CanUserVote(int id, double rating)
+        private JsonResult TryToVote(int id, int vote)
         {
-            HttpCookie voteCookie = Request.Cookies["Votes"];
-            if (voteCookie != null)
+            if (!this.Request.IsAuthenticated)
             {
-                if (voteCookie[id.ToString()] != null)
-                {
-                    return false;
-                }
+                return this.Json(new { Success = false, Message = "Please log to Vote." });
             }
 
-            //create the cookie and set the value 
-            voteCookie = new HttpCookie("Votes");
-            voteCookie[id.ToString()] = rating.ToString();
-            Response.Cookies.Add(voteCookie);
+            if (this.externalItemsService.Rate(id, this.User.Identity.GetUserId(), vote))
+            {
+                return null;
+            }
 
-            return true;
+            return this.Json(new { Success = false, Message = "Sorry, you already voted for this item." });
         }
     }
 }
