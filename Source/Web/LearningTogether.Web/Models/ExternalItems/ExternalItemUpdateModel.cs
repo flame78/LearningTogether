@@ -21,5 +21,8 @@
 
         [Required]
         public ExternalItemType Type { get; set; }
+
+        [Required]
+        public int CategoryId { get; set; }
     }
 }

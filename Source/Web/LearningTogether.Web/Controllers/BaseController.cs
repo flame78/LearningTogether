@@ -3,6 +3,8 @@
     using System.Web.Mvc;
     using AutoMapper;
     using Infrastructure.Mapping;
+
+    using LearningTogether.Services.Data;
     using LearningTogether.Services.Web;
 
     public abstract class BaseController : Controller

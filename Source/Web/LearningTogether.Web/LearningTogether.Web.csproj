@@ -233,6 +233,7 @@
     <Compile Include="Models\Account\VerifyCodeViewModel.cs" />
     <Compile Include="Models\ExternalItems\ExternalItemUpdateModel.cs" />
     <Compile Include="Models\ExternalItems\IndexViewModel.cs" />
+    <Compile Include="Models\PaginatedList.cs" />
     <Compile Include="Models\Home\IndexViewModel.cs" />
     <Compile Include="Models\Home\JokeCategoryViewModel.cs" />
     <Compile Include="Models\Home\JokeViewModel.cs" />
@@ -320,7 +321,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Scripts\jquery-2.2.0.min.map" />
-    <Content Include="Views\Jokes\ById.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\ExternalResources\Index.cshtml" />
     <Content Include="Views\ExternalResources\Add.cshtml" />
@@ -337,10 +337,6 @@
     <Folder Include="Content\Kendo-css\" />
     <Folder Include="Content\Uploads\" />
     <Folder Include="Scripts\KendoUi\" />
-    <Folder Include="Views\Base\" />
-    <Folder Include="Views\Categories\" />
-    <Folder Include="Views\Category\" />
-    <Folder Include="Views\Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

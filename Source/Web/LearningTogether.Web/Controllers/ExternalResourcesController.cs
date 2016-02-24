@@ -10,7 +10,11 @@ namespace LearningTogether.Web.Controllers
     using LearningTogether.Data.Models;
     using LearningTogether.Services.Data;
     using LearningTogether.Services.Web;
+    using LearningTogether.Web.Infrastructure;
     using LearningTogether.Web.Infrastructure.Mapping;
+    using LearningTogether.Web.Models;
+    using LearningTogether.Web.Models.ExternalItems;
+    using LearningTogether.Web.ViewModels;
     using LearningTogether.Web.ViewModels.ExternalItems;
 
     using Microsoft.AspNet.Identity;
@@ -18,31 +22,60 @@ namespace LearningTogether.Web.Controllers
     [Authorize]
     public class ExternalResourcesController : BaseController
     {
+        private const int ItemsPerPage = 6;
+
         private readonly IFilesService filesService;
 
         private readonly IExternalItemsService externalItemsService;
 
-        public ExternalResourcesController(IExternalItemsService externalItemsService, IFilesService filesService)
+        private readonly ICategoriesService categoriesService;
+
+
+        public ExternalResourcesController(IExternalItemsService externalItemsService, ICategoriesService categoriesService, IFilesService filesService)
         {
             this.filesService = filesService;
             this.externalItemsService = externalItemsService;
+            this.categoriesService = categoriesService;
         }
 
-        // GET: ExternalItems
+        [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            var type = ExternalItemType.Site;
+            var items = this.externalItemsService.All(type).To<ExternalItemViewModel>();
+            var paginatedItems = new PaginatedList<ExternalItemViewModel>(items, 1, ItemsPerPage);
+            var indexVm = new IndexViewModel() { Type = ExternalItemType.Site, Items = paginatedItems, Category = string.Empty, Filter = string.Empty };
+
+            return this.View(indexVm);
+        }
+
+        [HttpPost]
+        public ActionResult Index(IndexViewModel ivm, int pageIndex)
+        {
+            var type = ExternalItemType.Site;
+            var items = this.externalItemsService.All(type).To<ExternalItemViewModel>();
+
+            //todo:apply filter and category
+
+            var paginatedItems = new PaginatedList<ExternalItemViewModel>(items, pageIndex, ItemsPerPage);
+            var indexVm = new IndexViewModel() { Type = ExternalItemType.Site, Items = paginatedItems };
+
+            return this.View(indexVm);
         }
 
         [HttpGet]
         public ActionResult Add()
         {
+            ViewBag.Categories =
+                this.categoriesService.GetAll().Select(x => new SelectListItem() { Value = x.Id.ToString(), Text = x.Name }).ToList();
             return this.View();
         }
 
         [HttpGet]
         public ActionResult Edit(int id)
         {
+            ViewBag.Categories =
+               this.categoriesService.GetAll().Select(x => new SelectListItem() { Value = x.Id.ToString(), Text = x.Name }).ToList();
             var item = Mapper.Map<ExternalItemUpdateModel>(externalItemsService.GetById(id));
             return this.View(item);
         }
@@ -59,7 +92,7 @@ namespace LearningTogether.Web.Controllers
 
                 if (file != null && file.ContentLength > 0)
                 {
-                     screenShotName = this.ScreenShotUpload(file);
+                    screenShotName = this.ScreenShotUpload(file);
                 }
 
                 if (screenShotName != null)
@@ -78,22 +111,27 @@ namespace LearningTogether.Web.Controllers
             return this.View(item);
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Add(ExternalItemUpdateModel item, HttpPostedFileBase file)
         {
             if (this.ModelState.IsValid)
             {
-                var screenShotName = this.ScreenShotUpload(file);
+                string screenShotName = null;
+
+                if (file != null && file.ContentLength > 0)
+                {
+                    screenShotName = this.ScreenShotUpload(file);
+                }
+
+                var dbItem = new[] { item }.AsQueryable().To<ExternalItem>().First();
                 if (screenShotName != null)
                 {
-                    var dbItem = new[] { item }.AsQueryable().To<ExternalItem>().First();
                     dbItem.ScreenShotName = screenShotName;
-                    dbItem.AuthorId = this.User.Identity.GetUserId();
-                    this.externalItemsService.Create(dbItem);
-                    return this.RedirectToAction("Index");
                 }
+                dbItem.AuthorId = this.User.Identity.GetUserId();
+                this.externalItemsService.Create(dbItem);
+                return this.RedirectToAction("Index");
             }
 
             return this.View(item);

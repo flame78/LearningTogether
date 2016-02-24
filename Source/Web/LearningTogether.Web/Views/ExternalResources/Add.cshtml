@@ -4,8 +4,11 @@
 
 @using (Html.BeginForm("Add", "ExternalResources", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
 {
+    @Html.AntiForgeryToken()
 
     @Html.EditorForModel()
+
+    
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

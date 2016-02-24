@@ -1,7 +1,36 @@
-﻿@model dynamic
+﻿@using LearningTogether.Web.Infrastructure.Extensions
+@model LearningTogether.Web.Models.ExternalItems.IndexViewModel
 
 @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Websites, Viedeos and Articles";
 }
 
-<h2>@ViewBag.Title</h2>
+<h2 class="text-center">@ViewBag.Title</h2><div class="pull-right com-sm-4">@Html.ActionLink("Add", "Add", null, new { @class = "btn btn-default" })</div>
+<h3 class="text-center">External resources</h3>
+
+
+@{
+    var i = 0;
+
+    foreach (var item in Model.Items)
+    {
+
+
+        @Html.DisplayFor(x => item)
+        i++;
+        if (i % 3 == 0)
+        {
+            <div class="row clearfix">
+            </div>
+        }
+    }
+}
+
+@Html.BeginForm("Index", "ExternalResources", FormMethod.Post, new { id = "form" })
+
+@Html.Pager("form", Model.Items.PageIndex, Model.Items.TotalPages)
+
+@section scripts{
+    @Scripts.Render("~/Bundles/Rating")
+}
