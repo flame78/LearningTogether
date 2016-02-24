@@ -43,16 +43,16 @@
                 @Html.Ratings(item.Rating)
             </td>
             <td>
-                @Html.Display(item.Title)
+                @item.Title
             </td>
             <td>
-                @Html.Display(item.BookAuthor)
+                @item.BookAuthor
             </td>
             <td>
-                @Html.Display(item.ISBN)
+                @item.ISBN
             </td>
             <td>
-                @Html.Display(item.Category)
+                @item.Category
             </td>
             <td>
                 @Html.ActionLink("Details", "Details", new { id = item.Id }) |
