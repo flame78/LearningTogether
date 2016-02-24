@@ -28,7 +28,7 @@
 
                 </ul>
                 @RenderSection("menu", required: false)
-                @if (User.IsInRole(GlobalConstants.AdministratorRoleName))
+                @if (User.IsInRole(GlobalConstants.AdministratorRoleName) && ViewContext.RouteData.DataTokens["area"] == null)
                 {
                     <ul class="nav navbar-nav">
                         <li>@Html.ActionLink("Administration", "Index", "Categories", new { area = WebConstants.AdministrationAraeName }, null)</li>

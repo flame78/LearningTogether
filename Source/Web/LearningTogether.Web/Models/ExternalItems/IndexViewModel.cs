@@ -17,6 +17,6 @@ namespace LearningTogether.Web.Models.ExternalItems
 
         public string Filter { get; set; }
 
-        public string Category { get; set; }
+        public int? CategoryId { get; set; }
     }
 }

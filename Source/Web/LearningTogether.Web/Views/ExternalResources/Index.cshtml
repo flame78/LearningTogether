@@ -1,4 +1,5 @@
 ﻿@using LearningTogether.Web.Infrastructure.Extensions
+
 @model LearningTogether.Web.Models.ExternalItems.IndexViewModel
 
 @{
@@ -6,11 +7,20 @@
     ViewBag.Title = "Websites, Viedeos and Articles";
 }
 
-<h2 class="text-center">@ViewBag.Title</h2><div class="pull-right com-sm-4">@Html.ActionLink("Add", "Add", null, new { @class = "btn btn-default" })</div>
-<h3 class="text-center">External resources</h3>
-
+<h2 class="text-center">@ViewBag.Title</h2>
 @using (Html.BeginForm("Index", "ExternalResources", FormMethod.Post, new { id = "form" }))
 {
+    <div class="pull-left col-sm-4">
+        Category @Html.DropDownListFor(m => m.CategoryId, (List<SelectListItem>)ViewBag.Categories, "----- All -----")
+        @Html.TextBoxFor(x => x.Filter, new { placeholder = "Search text" })
+    </div>
+    <div class="pull-right col-sm-4">
+        @Html.ActionLink("Add", "Add", null, new { @class = "btn btn-success" })
+    </div>
+    <div class="col-sm-4 text-center">
+        @Html.RadioButtonForEnum(x => x.Type)
+        <a href="#" class="btn btn-info" onclick="SubmitData()">Filter</a>
+    </div>
     @Html.Pager("form", Model.Items.PageIndex, Model.Items.TotalPages)
 }
 

@@ -14,7 +14,7 @@
                 Administration
                 <span class="caret"></span>
             </a>
-            <ul class="dropdown-menu nav navbar-nav">
+            <ul class="dropdown-menu btn btn-default">
                 <li>@Html.ActionLink("Users", "Index", "Users", new { area = WebConstants.AdministrationAraeName }, null)</li>
                 <li>@Html.ActionLink("Categories", "Index", "Categories", new { area = WebConstants.AdministrationAraeName }, null)</li>
                 <li>@Html.ActionLink("Ratings", "Index", "Categories", new { area = WebConstants.AdministrationAraeName }, null)</li>
@@ -28,6 +28,7 @@
     </ul>
 
 }
+<br/>
 <div class="container">
     @RenderBody()
 </div>

@@ -41,10 +41,12 @@ namespace LearningTogether.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            ViewBag.Categories = this.GetCategories();
+
             var type = ExternalItemType.Site;
             var items = this.externalItemsService.All(type).To<ExternalItemViewModel>();
             var paginatedItems = new PaginatedList<ExternalItemViewModel>(items, 1, ItemsPerPage);
-            var indexVm = new IndexViewModel() { Type = ExternalItemType.Site, Items = paginatedItems, Category = string.Empty, Filter = string.Empty };
+            var indexVm = new IndexViewModel() { Type = ExternalItemType.Site, Items = paginatedItems };
 
             return this.View(indexVm);
         }
@@ -52,30 +54,42 @@ namespace LearningTogether.Web.Controllers
         [HttpPost]
         public ActionResult Index(IndexViewModel ivm, int pageIndex)
         {
-            var type = ExternalItemType.Site;
-            var items = this.externalItemsService.All(type).To<ExternalItemViewModel>();
+            var type = ivm.Type;
+            var items = this.externalItemsService.All(type);
 
-            //todo:apply filter and category
+            if (ivm.CategoryId != null)
+            {
+               items = items.Where(x => x.CategoryId == ivm.CategoryId);
+            }
 
-            var paginatedItems = new PaginatedList<ExternalItemViewModel>(items, pageIndex, ItemsPerPage);
-            var indexVm = new IndexViewModel() { Type = ExternalItemType.Site, Items = paginatedItems };
+            if (!string.IsNullOrWhiteSpace(ivm.Filter))
+            {
+                items = items.Where(x => x.Description.ToLower().Contains(ivm.Filter));
+            }
 
-            return this.View(indexVm);
+            var filteredSortedItems = items.To<ExternalItemViewModel>();
+
+            ViewBag.Categories = this.GetCategories();
+
+            var paginatedItems = new PaginatedList<ExternalItemViewModel>(filteredSortedItems, pageIndex, ItemsPerPage);
+            ivm.Items = paginatedItems;
+
+            return this.View(ivm);
         }
 
         [HttpGet]
         public ActionResult Add()
         {
-            ViewBag.Categories =
-                this.categoriesService.GetAll().Select(x => new SelectListItem() { Value = x.Id.ToString(), Text = x.Name }).ToList();
+            ViewBag.Categories = this.GetCategories();
+
             return this.View();
         }
 
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            ViewBag.Categories =
-               this.categoriesService.GetAll().Select(x => new SelectListItem() { Value = x.Id.ToString(), Text = x.Name }).ToList();
+            ViewBag.Categories = this.GetCategories();
+
             var item = Mapper.Map<ExternalItemUpdateModel>(externalItemsService.GetById(id));
             return this.View(item);
         }
@@ -129,6 +143,7 @@ namespace LearningTogether.Web.Controllers
                 {
                     dbItem.ScreenShotName = screenShotName;
                 }
+
                 dbItem.AuthorId = this.User.Identity.GetUserId();
                 this.externalItemsService.Create(dbItem);
                 return this.RedirectToAction("Index");
@@ -158,5 +173,16 @@ namespace LearningTogether.Web.Controllers
 
             return null;
         }
+
+        [OutputCache(Duration = 10 * 60)]
+        [ChildActionOnly]
+        private List<SelectListItem> GetCategories()
+        {
+            var categories = this.categoriesService.GetAll()
+                    .Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name })
+                    .ToList();
+            return categories;
+
+        } 
     }
 }

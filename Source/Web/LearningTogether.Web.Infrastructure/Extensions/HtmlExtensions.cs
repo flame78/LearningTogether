@@ -1,7 +1,11 @@
 ﻿namespace LearningTogether.Web.Infrastructure.Extensions
 {
+    using System;
+    using System.Linq.Expressions;
     using System.Text;
+    using System.Web;
     using System.Web.Mvc;
+    using System.Web.Mvc.Html;
 
     public static class HtmlExtensions
     {
@@ -32,6 +36,28 @@
 
             html.Append("</span></span>");
             return new MvcHtmlString(html.ToString());
+        }
+
+        public static MvcHtmlString RadioButtonForEnum<TModel, TProperty>(
+            this HtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TProperty>> expression)
+        {
+            var metaData = ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData);
+            var names = Enum.GetNames(metaData.ModelType);
+            var sb = new StringBuilder();
+            foreach (var name in names)
+            {
+                var id = string.Format(
+                    "{0}_{1}_{2}",
+                    htmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix,
+                    metaData.PropertyName,
+                    name);
+
+                var radio = htmlHelper.RadioButtonFor(expression, name, new { id = id }).ToHtmlString();
+                sb.AppendFormat("<div class='col-sm-3'><label for=\"{0}\">{1}</label> {2}</div>", id, HttpUtility.HtmlEncode(name), radio);
+            }
+
+            return MvcHtmlString.Create(sb.ToString());
         }
 
         public static MvcHtmlString SubmitButton(
@@ -89,10 +115,11 @@
                 html.Append(
                     "<li><a href='#' aria-label='Next' onclick='IncreasePage()'><span aria-hidden='true'>&raquo;</span></a></li>");
             }
-            html.Append(
-                "</ul></nav><script>function DecreasePage() { var pageIndex = $('#pageIndex').attr('value');");
+            html.Append("</ul></nav><script>function DecreasePage() { var pageIndex = $('#pageIndex').attr('value');");
             html.AppendFormat("pageIndex--; $('#pageIndex').attr('value', pageIndex); $('#{0}').submit(); }}", formId);
-            html.AppendFormat("function GotoPage(page) {{ $('#pageIndex').attr('value', page); $('#{0}').submit(); }}", formId);
+            html.AppendFormat(
+                "function GotoPage(page) {{ $('#pageIndex').attr('value', page); $('#{0}').submit(); }}",
+                formId);
             html.Append("function IncreasePage() { var pageIndex = $('#pageIndex').attr('value'); pageIndex++;");
             html.AppendFormat("$('#pageIndex').attr('value', pageIndex);$('#{0}').submit();}}", formId);
             html.AppendFormat("function SubmitData() {{ $('#{0}').submit(); }} </script>", formId);
