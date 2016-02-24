@@ -1,4 +1,4 @@
-﻿namespace EasyPTC.Web.Areas.Administration.Controllers.Base
+﻿namespace LearningTogether.Web.Areas.Administration.Controllers.Base
 {
     using LearningTogether.Web.Controllers;
 

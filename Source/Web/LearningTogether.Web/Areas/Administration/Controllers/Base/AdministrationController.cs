@@ -1,9 +1,8 @@
-﻿namespace LearningTogether.Web.Areas.Administration.Controllers
+﻿namespace LearningTogether.Web.Areas.Administration.Controllers.Base
 {
     using System.Web.Mvc;
 
     using LearningTogether.Common;
-    using LearningTogether.Services.Data;
     using LearningTogether.Web.Controllers;
 
     [Authorize(Roles = GlobalConstants.AdministratorRoleName)]

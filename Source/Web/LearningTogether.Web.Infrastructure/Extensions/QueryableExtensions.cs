@@ -1,10 +1,12 @@
-﻿namespace LearningTogether.Web.Infrastructure.Mapping
+﻿namespace LearningTogether.Web.Infrastructure.Extensions
 {
     using System;
     using System.Linq;
     using System.Linq.Expressions;
 
     using AutoMapper.QueryableExtensions;
+
+    using LearningTogether.Web.Infrastructure.Mapping;
 
     public static class QueryableExtensions
     {

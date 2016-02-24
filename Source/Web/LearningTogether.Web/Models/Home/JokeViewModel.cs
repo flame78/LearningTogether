@@ -1,6 +1,7 @@
-﻿namespace LearningTogether.Web.ViewModels.Home
+﻿namespace LearningTogether.Web.Models.Home
 {
     using AutoMapper;
+
     using LearningTogether.Data.Models;
     using LearningTogether.Services.Web;
     using LearningTogether.Web.Infrastructure.Mapping;

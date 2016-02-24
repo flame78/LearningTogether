@@ -1,4 +1,4 @@
-﻿namespace LearningTogether.Web.ViewModels.Home
+﻿namespace LearningTogether.Web.Models.Home
 {
     using LearningTogether.Data.Models;
     using LearningTogether.Web.Infrastructure.Mapping;

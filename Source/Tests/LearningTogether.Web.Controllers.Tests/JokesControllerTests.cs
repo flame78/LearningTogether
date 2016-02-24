@@ -5,7 +5,6 @@
     using LearningTogether.Data.Models;
     using LearningTogether.Services.Data;
     using LearningTogether.Web.Infrastructure.Mapping;
-    using LearningTogether.Web.ViewModels.Home;
 
     using NUnit.Framework;
 

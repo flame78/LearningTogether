@@ -12,8 +12,9 @@
     using LearningTogether.Data.Models;
     using LearningTogether.Services.Data;
     using LearningTogether.Services.Web;
+    using LearningTogether.Web.Infrastructure.Extensions;
     using LearningTogether.Web.Infrastructure.Mapping;
-    using LearningTogether.Web.ViewModels;
+    using LearningTogether.Web.Models.ExternalItems;
 
     public class UploadController : BaseController
     {

@@ -10,7 +10,7 @@
     using Microsoft.Owin.Security;
 
     using LearningTogether.Data.Models;
-    using LearningTogether.Web.ViewModels.Account;
+    using LearningTogether.Web.Models.Account;
 
     [Authorize]
     public class AccountController : BaseController

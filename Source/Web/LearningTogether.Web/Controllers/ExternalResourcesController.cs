@@ -11,11 +11,10 @@ namespace LearningTogether.Web.Controllers
     using LearningTogether.Services.Data;
     using LearningTogether.Services.Web;
     using LearningTogether.Web.Infrastructure;
+    using LearningTogether.Web.Infrastructure.Extensions;
     using LearningTogether.Web.Infrastructure.Mapping;
     using LearningTogether.Web.Models;
     using LearningTogether.Web.Models.ExternalItems;
-    using LearningTogether.Web.ViewModels;
-    using LearningTogether.Web.ViewModels.ExternalItems;
 
     using Microsoft.AspNet.Identity;
 
@@ -46,13 +45,13 @@ namespace LearningTogether.Web.Controllers
             var type = ExternalItemType.Site;
             var items = this.externalItemsService.All(type).To<ExternalItemViewModel>();
             var paginatedItems = new PaginatedList<ExternalItemViewModel>(items, 1, ItemsPerPage);
-            var indexVm = new IndexViewModel() { Type = ExternalItemType.Site, Items = paginatedItems };
+            var indexVm = new ExternalIndexViewModel() { Type = ExternalItemType.Site, Items = paginatedItems };
 
             return this.View(indexVm);
         }
 
         [HttpPost]
-        public ActionResult Index(IndexViewModel ivm, int pageIndex)
+        public ActionResult Index(ExternalIndexViewModel ivm, int pageIndex)
         {
             var type = ivm.Type;
             var items = this.externalItemsService.All(type);

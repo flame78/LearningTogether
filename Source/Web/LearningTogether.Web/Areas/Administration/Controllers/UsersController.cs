@@ -16,7 +16,10 @@ namespace LearningTogether.Web.Areas.Administration.Controllers
     using System.Web.UI.WebControls;
 
     using LearningTogether.Data;
+    using LearningTogether.Web.Areas.Administration.Controllers.Base;
     using LearningTogether.Web.Areas.Administration.Models;
+    using LearningTogether.Web.Areas.Administration.Models.Users;
+    using LearningTogether.Web.Infrastructure.Extensions;
     using LearningTogether.Web.Infrastructure.Mapping;
 
     using Microsoft.AspNet.Identity.EntityFramework;

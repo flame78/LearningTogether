@@ -5,11 +5,11 @@
     using System.Web;
     using System.Web.Mvc;
 
+    using LearningTogether.Web.Models.Manage;
+
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
-
-    using LearningTogether.Web.ViewModels.Manage;
 
     [Authorize]
     public class ManageController : BaseController

@@ -1,15 +1,9 @@
-﻿namespace LearningTogether.Web.ViewModels
+﻿namespace LearningTogether.Web.Models.ExternalItems
 {
-    using System;
-    using System.ComponentModel.DataAnnotations;
-    using System.IO;
     using System.Linq;
-    using System.Text;
-    using System.Windows.Forms;
 
     using AutoMapper;
 
-    using LearningTogether.Common;
     using LearningTogether.Data.Models;
     using LearningTogether.Web.Infrastructure.Extensions;
     using LearningTogether.Web.Infrastructure.Mapping;

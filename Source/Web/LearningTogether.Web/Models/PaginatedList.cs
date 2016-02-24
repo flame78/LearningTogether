@@ -9,10 +9,11 @@
     {
         public PaginatedList(IQueryable<T> source, int pageIndex, int pageSize)
         {
-            this.PageIndex = pageIndex;
             this.PageSize = pageSize;
             this.TotalCount = source.Count();
             this.TotalPages = (int)Math.Ceiling(this.TotalCount / (double)this.PageSize);
+
+            this.PageIndex = pageIndex > this.TotalPages ? this.TotalPages : pageIndex;
 
             this.AddRange(source.Skip((this.PageIndex - 1) * this.PageSize).Take(this.PageSize));
         }

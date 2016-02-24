@@ -214,6 +214,7 @@
     <Compile Include="Areas\Administration\Models\Users\UserViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\ExternalResourcesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
@@ -231,8 +232,9 @@
     <Compile Include="Models\Account\ResetPasswordViewModel.cs" />
     <Compile Include="Models\Account\SendCodeViewModel.cs" />
     <Compile Include="Models\Account\VerifyCodeViewModel.cs" />
+    <Compile Include="Models\Books\BookItemViewModel.cs" />
     <Compile Include="Models\ExternalItems\ExternalItemUpdateModel.cs" />
-    <Compile Include="Models\ExternalItems\IndexViewModel.cs" />
+    <Compile Include="Models\ExternalItems\ExternalIndexViewModel.cs" />
     <Compile Include="Models\PaginatedList.cs" />
     <Compile Include="Models\Home\IndexViewModel.cs" />
     <Compile Include="Models\Home\JokeCategoryViewModel.cs" />
@@ -327,6 +329,8 @@
     <Content Include="Views\Shared\_LayoutWithContainer.cshtml" />
     <Content Include="Views\ExternalResources\Edit.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ExternalItemViewModel.cshtml" />
+    <Content Include="Views\Books\Details.cshtml" />
+    <Content Include="Views\Books\Index.cshtml" />
     <None Include="Views\Upload\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

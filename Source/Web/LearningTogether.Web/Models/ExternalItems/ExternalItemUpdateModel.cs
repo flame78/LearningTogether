@@ -1,4 +1,4 @@
-﻿namespace LearningTogether.Web.ViewModels.ExternalItems
+﻿namespace LearningTogether.Web.Models.ExternalItems
 {
     using System.ComponentModel.DataAnnotations;
 

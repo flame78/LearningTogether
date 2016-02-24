@@ -47,7 +47,6 @@
     <Compile Include="ExternalItemsService.cs" />
     <Compile Include="GenericItemsService.cs" />
     <Compile Include="IArticleItems.cs" />
-    <Compile Include="IBookItems.cs" />
     <Compile Include="ICategoriesService.cs" />
     <Compile Include="ICommentsService.cs" />
     <Compile Include="IExternalItemsService.cs" />

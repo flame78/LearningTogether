@@ -7,9 +7,10 @@
     using LearningTogether.Common;
     using LearningTogether.Data.Models;
     using LearningTogether.Services.Data;
+    using LearningTogether.Web.Infrastructure.Extensions;
     using LearningTogether.Web.Infrastructure.Mapping;
-    using LearningTogether.Web.ViewModels;
-    using LearningTogether.Web.ViewModels.Home;
+    using LearningTogether.Web.Models.ExternalItems;
+    using LearningTogether.Web.Models.Home;
 
     using Microsoft.AspNet.Identity;
 

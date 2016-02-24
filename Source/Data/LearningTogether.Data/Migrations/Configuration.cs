@@ -1,5 +1,6 @@
 ﻿namespace LearningTogether.Data.Migrations
 {
+    using System.Collections.Generic;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
@@ -39,6 +40,67 @@
             context.Categories.AddOrUpdate(categories);
             context.SaveChanges();
 
+            var books = new List<BookItem>();
+
+            for (int i = 1; i < 30; i++)
+            {
+                books.Add(
+                    new BookItem()
+                    {
+                        Author = user,
+                        BookAuthor = "John Dow " + i,
+                        Category = categories[7],
+                        Description =
+                                i
+                                + " Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
+                        Title = "Lorem Ipsum" + i,
+                        ISBN = "978-3-16-148410-" + i,
+                    });
+            }
+
+            context.BookItems.AddOrUpdate(books.ToArray());
+            context.SaveChanges();
+
+            var articles = new List<ArticleItem>();
+
+            articles.AddRange(
+                new ArticleItem[]
+                    {
+                        new ArticleItem()
+                            {
+                                Author = user,
+                                Title = "None",
+                                Description = "For now this nothing!",
+                                Content = "<h1>very important</h1>",
+                                Category = categories[7]
+                            },
+                        new ArticleItem()
+                            {
+                                Author = user,
+                                Title = "Coding",
+                                Description = "How to make things to work",
+                                Content = "<h1>Learn</h1> and <h2>Exercise</h2>",
+                                Category = categories[0]
+                            }
+                    });
+
+            for (int i = 1; i < 30; i++)
+            {
+                articles.Add(
+                    new ArticleItem()
+                    {
+                        Author = user,
+                        Category = categories[7],
+                        Description =
+                                i
+                                + " Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
+                        Title = "Lorem Ipsum" + i,
+                    });
+            }
+
+            context.ArticleItems.AddOrUpdate(articles.ToArray());
+            context.SaveChanges();
+
             var extItems = new ExternalItem[]
                                {
                                    new ExternalItem()
@@ -73,29 +135,6 @@ and are likewise accessible free on YouTube.com. ",
                                        },
                                };
             context.ExternalItems.AddOrUpdate(extItems);
-
-            var articles = new ArticleItem[]
-                               {
-                                   new ArticleItem()
-                                       {
-                                           Author = user,
-                                           Title = "None",
-                                           Description = "For now this nothing!",
-                                           Content = "<h1>very important</h1>",
-                                           Category = categories[7]
-                                       },
-                                   new ArticleItem()
-                                       {
-                                           Author = user,
-                                           Title = "Coding",
-                                           Description = "How to make things to work",
-                                           Content = "<h1>Learn</h1> and <h2>Exercise</h2>",
-                                           Category = categories[0]
-                                       },
-                               };
-            context.ArticleItems.AddOrUpdate(articles);
-
-            context.SaveChanges();
         }
 
         private User SeedUsers(LearningTogetherDbContext context)

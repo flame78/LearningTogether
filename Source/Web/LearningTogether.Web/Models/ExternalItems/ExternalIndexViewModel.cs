@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LearningTogether.Web.Models.ExternalItems
+﻿namespace LearningTogether.Web.Models.ExternalItems
 {
     using LearningTogether.Common;
-    using LearningTogether.Web.ViewModels;
 
-    public class IndexViewModel
+    public class ExternalIndexViewModel
     {
         public PaginatedList<ExternalItemViewModel> Items { get; set; }
 

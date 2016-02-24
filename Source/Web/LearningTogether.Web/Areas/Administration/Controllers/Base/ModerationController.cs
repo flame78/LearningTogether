@@ -1,8 +1,6 @@
-﻿namespace LearningTogether.Web.Areas.Administration.Controllers
+﻿namespace LearningTogether.Web.Areas.Administration.Controllers.Base
 {
     using System.Web.Mvc;
-
-    using EasyPTC.Web.Areas.Administration.Controllers.Base;
 
     using LearningTogether.Common;
 

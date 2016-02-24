@@ -1,0 +1,67 @@
+﻿@using LearningTogether.Web.Infrastructure.Extensions
+@model LearningTogether.Web.Models.Books.BookItemViewModel
+
+@{
+    ViewBag.Title = "Book Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>BookItem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Rating
+        </dt>
+        <dd>
+            @Html.Ratings(Model.Rating)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookAuthor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookAuthor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ISBN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ISBN)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+@section scripts{
+    @Scripts.Render("~/Bundles/Rating")
+}

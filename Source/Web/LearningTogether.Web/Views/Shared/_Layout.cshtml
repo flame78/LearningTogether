@@ -25,6 +25,8 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = string.Empty }, null)</li>
                     <li>@Html.ActionLink("External Resources", "Index", "ExternalResources", new { area = string.Empty }, null)</li>
+                    <li>@Html.ActionLink("Books", "Index", "Books", new { area = string.Empty }, null)</li>
+                    <li>@Html.ActionLink("Articles", "Index", "Home", new { area = string.Empty }, null)</li>
 
                 </ul>
                 @RenderSection("menu", required: false)

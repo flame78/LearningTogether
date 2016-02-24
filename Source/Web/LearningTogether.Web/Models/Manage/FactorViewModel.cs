@@ -1,4 +1,4 @@
-﻿namespace LearningTogether.Web.ViewModels.Manage
+﻿namespace LearningTogether.Web.Models.Manage
 {
     public class FactorViewModel
     {

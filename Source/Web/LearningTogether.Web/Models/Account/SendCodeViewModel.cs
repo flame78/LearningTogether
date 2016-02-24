@@ -1,4 +1,4 @@
-﻿namespace LearningTogether.Web.ViewModels.Account
+﻿namespace LearningTogether.Web.Models.Account
 {
     using System.Collections.Generic;
     using System.Web.Mvc;

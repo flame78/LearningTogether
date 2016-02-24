@@ -1,0 +1,67 @@
+﻿@using LearningTogether.Web.Infrastructure.Extensions
+@model LearningTogether.Web.Models.PaginatedList<LearningTogether.Web.Models.Books.BookItemViewModel>
+
+@{
+    ViewBag.Title = "Books";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (Html.BeginForm("Index", "Books", FormMethod.Post, new { id = "form" }))
+{
+    @Html.Pager("form", Model.PageIndex, Model.TotalPages)
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.Label("Rating")
+        </th>
+        <th>
+            @Html.Label("Title")
+        </th>
+        <th>
+            @Html.Label("Author")
+        </th>
+        <th>
+            @Html.Label("ISBN")
+        </th>
+        <th>
+            @Html.Label("Category")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.Ratings(item.Rating)
+            </td>
+            <td>
+                @Html.Display(item.Title)
+            </td>
+            <td>
+                @Html.Display(item.BookAuthor)
+            </td>
+            <td>
+                @Html.Display(item.ISBN)
+            </td>
+            <td>
+                @Html.Display(item.Category)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section scripts{
+    @Scripts.Render("~/Bundles/Rating")
+}
